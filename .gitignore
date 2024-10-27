@@ -1,0 +1,15 @@
+/build
+/__pycache
+/logs
+/outputs
+/env
+/tests/__pycache__
+/218mathtools/__pycache__
+*egg-info/
+*__pycache__
+*.pyc
+*.csv
+*.log
+*.swp
+*.npy
+run.sh
