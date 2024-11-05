@@ -8,7 +8,8 @@ def inputMatrix():
         line = input()
         if(line == "done"):
             break
-        line = [float(x) for x in line.split(" ")]
+        from fractions import Fraction
+        line = [Fraction(x) for x in line.split(" ")]
         matrix.append(line)
 
     return Matrix(matrix)
@@ -57,9 +58,13 @@ def main():
             out = a.det()
         if (operation == "8"):
             print("Eigenvectors====")
-            eig = float( input("Enter your eigenvalue\n") )
+            eig =input("If you would like to calculate the eigenvectors for a particular value, enter it. If not, hit enter.\n")
             print("\n")
-            out = ( a - ( eig * idenn ) ).nullspace()
+            if(len(eig) == 0):
+                out = a.eigenvects()
+            else:
+                eig = float(eig)
+                out = ( a - ( eig * idenn ) ).nullspace()
         # if (operation == "9"):
         #     print("Inverse")
 
