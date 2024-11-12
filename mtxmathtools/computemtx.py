@@ -1,15 +1,16 @@
 from sympy import *
 
 def inputMatrix():
-    print("Input the matrix line by line. Type 'done' when you have finished.\n")
+    print("Input the matrix line by line. Press enter when you are done.\n")
     matrix = []
     line = ""
     while (line != "done"):
         line = input()
-        if(line == "done"):
+        if(not line.strip()):
             break
         from fractions import Fraction
-        line = [Fraction(x) for x in line.split(" ")]
+        line = line.strip().split()
+        line = [sympify(entry.replace("i", "I")) for entry in line]
         matrix.append(line)
 
     return Matrix(matrix)
@@ -30,7 +31,7 @@ def main():
     idenn = eye ( shape(a)[0] )
 
     print("\n\nSelect the operation you would like to compute. Type the number of your choice.\nIf you would like to compute multiple things, enter both numbers delineated by a space.\n")
-    op = input("1\tReduced Row Echelon Form\n2\tNull Space\n3\tColumn Space\n4\tTranspose\n5\tLeft Null Space\n6\tTranspose Row Echelon Form\n7\tDeterminant\n8\tEigenvectors\n")
+    op = input("1\tReduced Row Echelon Form\n2\tNull Space\n3\tColumn Space\n4\tTranspose\n5\tLeft Null Space\n6\tTranspose Row Echelon Form\n7\tDeterminant\n8\tEigenvectors\n9\tDiagnonalize\n")
     print("\n")
 
     for operation in op.split(" "):
@@ -65,8 +66,13 @@ def main():
             else:
                 eig = float(eig)
                 out = ( a - ( eig * idenn ) ).nullspace()
-        # if (operation == "9"):
-        #     print("Inverse")
+        if (operation == "9"):
+            print("Diagonalize====")
+            c, d = a.diagonalize()
+            print("C===")
+            pprint(c)
+            print("D===")
+            out = d
 
 
         pprint(out)
