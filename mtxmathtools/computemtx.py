@@ -31,7 +31,7 @@ def main():
     idenn = eye ( shape(a)[0] )
 
     print("\n\nSelect the operation you would like to compute. Type the number of your choice.\nIf you would like to compute multiple things, enter both numbers delineated by a space.\n")
-    op = input("1\tReduced Row Echelon Form\n2\tNull Space\n3\tColumn Space\n4\tTranspose\n5\tLeft Null Space\n6\tTranspose Row Echelon Form\n7\tDeterminant\n8\tEigenvectors\n9\tDiagnonalize\n")
+    op = input("1\tReduced Row Echelon Form\n2\tNull Space\n3\tColumn Space\n4\tTranspose\n5\tLeft Null Space\n6\tTranspose Row Echelon Form\n7\tDeterminant\n8\tEigenvectors\n9\tDiagnonalize\n10\tNormalize Columns\n")
     print("\n")
 
     for operation in op.split(" "):
@@ -64,7 +64,7 @@ def main():
             if(len(eig) == 0):
                 out = a.eigenvects()
             else:
-                eig = float(eig)
+                eig = sympify(eig)
                 out = ( a - ( eig * idenn ) ).nullspace()
         if (operation == "9"):
             print("Diagonalize====")
@@ -73,7 +73,13 @@ def main():
             pprint(c)
             print("D===")
             out = d
-
+        if (operation == "10"):
+            print("Normalize Columns====")
+            outcols = []
+            cols = [a.col(i) for i in range(a.cols)]
+            for col in cols:
+                outcols.append( col / col.norm() )
+            out = Matrix.hstack(*outcols)
 
         pprint(out)
         print("\n")
