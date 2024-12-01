@@ -31,7 +31,7 @@ def main():
     idenn = eye ( shape(a)[0] )
 
     print("\n\nSelect the operation you would like to compute. Type the number of your choice.\nIf you would like to compute multiple things, enter both numbers delineated by a space.\n")
-    op = input("1\tReduced Row Echelon Form\n2\tNull Space\n3\tColumn Space\n4\tTranspose\n5\tLeft Null Space\n6\tTranspose Row Echelon Form\n7\tDeterminant\n8\tEigenvectors\n9\tDiagnonalize\n10\tNormalize Columns\n")
+    op = input("1\tReduced Row Echelon Form\n2\tNull Space\n3\tColumn Space\n4\tTranspose\n5\tLeft Null Space\n6\tTranspose Row Echelon Form\n7\tDeterminant\n8\tEigenvectors\n9\tDiagnonalize\n10\tNormalize Columns\n11\tMultiply with Another Matrix\n12\tMultiply with Transpose (AAT)\n13\tMultiply with Transpose (ATA)\n14\tSingular Value Decomposition\n")
     print("\n")
 
     for operation in op.split(" "):
@@ -80,6 +80,29 @@ def main():
             for col in cols:
                 outcols.append( col / col.norm() )
             out = Matrix.hstack(*outcols)
+
+        if (operation == "11"):
+            print("Multiply Matrices====")
+            correctMatrix = "no"
+            while correctMatrix == "no":
+                b = inputMatrix()
+                print("Is this the matrix you wanted?")
+                pprint(b)
+                correctMatrix = input("Type 'yes' if this is the correct matrix, otherwise, type 'no'\n")
+                print("Result===")
+                out = a * b
+
+        if (operation == "12"):
+            print("Multiply by Transpose (AAT)====")
+            out = a * a_t
+
+        if (operation == "13"):
+            print("Multiply by Transpose (ATA)====")
+            out = a_t * a
+
+        if (operation == "14"):
+            print("Singular Value Decomposition====")
+            out = a.singular_value_decomposition() 
 
         pprint(out)
         print("\n")
