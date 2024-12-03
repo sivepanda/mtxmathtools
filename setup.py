@@ -3,7 +3,7 @@ print(find_packages())
 
 setup(
     name='mtxmathtools',
-    version='0.1.0',
+    version='0.4.0',
     packages=find_packages(include=['mtxmathtools']),
     install_requires=[
         'sympy',
