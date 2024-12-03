@@ -31,7 +31,7 @@ def main():
     idenn = eye ( shape(a)[0] )
 
     print("\n\nSelect the operation you would like to compute. Type the number of your choice.\nIf you would like to compute multiple things, enter both numbers delineated by a space.\n")
-    op = input("1\tReduced Row Echelon Form\n2\tNull Space\n3\tColumn Space\n4\tTranspose\n5\tLeft Null Space\n6\tTranspose Row Echelon Form\n7\tDeterminant\n8\tEigenvectors\n9\tDiagnonalize\n10\tNormalize Columns\n11\tMultiply with Another Matrix\n12\tMultiply with Transpose (AAT)\n13\tMultiply with Transpose (ATA)\n14\tSingular Value Decomposition\n")
+    op = input("1\tReduced Row Echelon Form\n2\tNull Space\n3\tColumn Space\n4\tTranspose\n5\tLeft Null Space\n6\tTranspose Row Echelon Form\n7\tDeterminant\n8\tEigenvectors\n9\tDiagnonalize\n10\tNormalize Columns\n11\tMultiply with Another Matrix\n12\tMultiply with Transpose (AAT)\n13\tMultiply with Transpose (ATA)\n14\tSingular Value Decomposition\n15\tGram-Schmidt (Columns are Vectors)\n")
     print("\n")
 
     for operation in op.split(" "):
@@ -103,6 +103,18 @@ def main():
         if (operation == "14"):
             print("Singular Value Decomposition====")
             out = a.singular_value_decomposition() 
+
+        if (operation == "15"):
+            print("Gram-Schmidt====")
+            outcols = []
+            cols = [a.col(i) for i in range(a.cols)]
+            outcols.append(cols.pop(0))
+            for col in cols:
+                curr = col
+                for c in outcols:
+                    curr = curr - ( c.dot(col) / c.dot(c)) * c
+                outcols.append(curr)
+            out = Matrix.hstack(*outcols)
 
         pprint(out)
         print("\n")
