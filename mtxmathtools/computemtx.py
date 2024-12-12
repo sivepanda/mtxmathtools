@@ -19,7 +19,7 @@ avail_operations = {
 }
 
 def inputMatrix():
-    print("Input the matrix line by line. Press enter when you are done.\n")
+    print("Input the matrix line by line (delineated by space - write complex or fractional items w/o spaces -> a+bi)\nPress enter when you are done.\n")
     matrix = []
     line = ""
     while (line != "done"):
