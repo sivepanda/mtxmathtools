@@ -53,8 +53,8 @@ def main():
     print("\n")
 
     for operation in op.split(" "):
-        out = "Invalid Operation."
-        print(avail_operations[operation] + "========")
+        out = avail_operations[operation] if operation in avail_operations else "Invalid Operation"
+        print(out + "========")
         if (operation == "1"):
             out = a.rref(pivots=False)
         if (operation == "2"):
